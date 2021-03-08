@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // render a fragment homepage
-
+        loadFragment(new HomeFragment(), R.id.fragContainerView);
 
         bundle = new Bundle();
         tabLayout = findViewById(R.id.tabLayout);
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                                                public void onTabSelected(TabLayout.Tab tab) {
                                                    switch(tab.getPosition()){
                                                        case 0:
+                                                           loadFragment(new HomeFragment(), R.id.fragContainerView);
                                                            break;
                                                        case 1:
                                                            client.get(url_character, new AsyncHttpResponseHandler() {

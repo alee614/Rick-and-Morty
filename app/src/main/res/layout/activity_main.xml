@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textView_title"
-        style="@android:style/Theme.Material.Light"
+        android:fontFamily="@font/get_schwifty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -59,7 +59,7 @@
             android:id="@+id/tabChild_character"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_character" />
+            android:icon="@android:drawable/ic_menu_myplaces" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabChild_episode"
@@ -71,7 +71,7 @@
             android:id="@+id/tabChild_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_location" />
+            android:icon="@android:drawable/ic_dialog_map" />
 
 
     </com.google.android.material.tabs.TabLayout>
