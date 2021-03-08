@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textView_title"
-        style="@android:style/Widget.DeviceDefault.Light.TextView"
+        style="@android:style/Theme.Material.Light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -40,6 +40,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
+        style="@style/Widget.MaterialComponents.TabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -48,10 +49,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home"/>
+            android:text="Home" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabChild_character"

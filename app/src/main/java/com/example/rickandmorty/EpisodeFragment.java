@@ -2,7 +2,10 @@ package com.example.rickandmorty;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,7 +71,7 @@ public class EpisodeFragment extends Fragment {
         int size = Integer.parseInt(count);
         Random rand = new Random();
         String randomCount = String.valueOf(rand.nextInt(size) + 1);
-        Log.d("count in episode", randomCount);
+        //Log.d("count in episode", randomCount);
         //client.setEnableRedirects(true, true, true);;
         url = url + randomCount;
 
@@ -81,27 +84,38 @@ public class EpisodeFragment extends Fragment {
                     JSONObject response = new JSONObject(new String(responseBody));
                     String name = response.getString("name");
                     String episode = response.getString("episode");
+                    String link = "https://rickandmorty.fandom.com/wiki/" + name.replace(" ", "_");
                     String airedDate = response.getString("air_date");
 
                     //replace the name's spaces with underscores to put in the notification
 
-                    // set up the onClick method here because it needs to use GET information
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
-                            .setSmallIcon(R.drawable.ic_launcher_foreground)
-                            .setContentTitle(getString(R.string.notification_title, name, episode))
-                            .setContentText(getString(R.string.notification, episode.substring(4), name))
-                            .setStyle(new NotificationCompat.BigTextStyle()
-                                    .bigText(getString(R.string.notification, episode.substring(4), name)))
-                            .setPriority(NotificationCompat.PRIORITY_HIGH);
 
-                    // this is for sending the user to the website
-                    //      .setContentIntent()
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
 
 // notificationId is a unique int for each notification that you must define
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+
+                            intent.setData(Uri.parse(link));
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, 0);
+
+
+                            // set up the onClick method here because it needs to use GET information
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
+                                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                                    .setContentTitle(getString(R.string.notification_title, name, episode))
+                                    .setContentText(getString(R.string.notification, episode.substring(4), link))
+                                    .setContentIntent(pendingIntent)
+                                    .setAutoCancel(true)
+                                    .setStyle(new NotificationCompat.BigTextStyle()
+                                            .bigText(getString(R.string.notification, episode.substring(4), link)))
+                                    .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+                            // this is for sending the user to the website
+                            //      .setContentIntent()
+                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
                             notificationManager.notify(NOTIFICATION_ID, builder.build());
                         }
                     });
@@ -139,14 +153,11 @@ public class EpisodeFragment extends Fragment {
                         //Log.d("testing", episodeCharacter.getImage_url());
                     }
 
-
                     //Log.d("adapter", String.valueOf(adapter.getItemCount()));
-
 
                     textView_episode.setText(episode);
                     textView_episodeName.setText(name);
                     textView_airedDate.setText(airedDate);
-
 
 
                 } catch (JSONException e) {
