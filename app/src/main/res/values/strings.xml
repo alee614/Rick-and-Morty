@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">RickandMorty</string>
+    <string name="title">Wubba Lubba Dub Dub!</string>
+    <string name="tab_character">Character</string>
+    <string name="tab_episode">Episode</string>
+    <string name="tab_location">Location</string>
+    <string name="more_info">More Information</string>
+    <string name="notification">To read more information about Episode %1$s, please visit: https://rickandmorty.fandom.com/wiki/%2$s.</string>
+    <string name="notification_title">%1$s: %2$s</string>
+
+    <string name="character_Status">Status: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
